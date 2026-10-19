@@ -74,6 +74,6 @@ for k in range(len(names)):
 fig.text(0.5, 0.005, "(c) total gain [dBi] vs azimuth at each beam's elevation (array factor x 3GPP element pattern)",
          ha="center", fontsize=11)
 title_src = "spreadsheet azimuths" if tag == "sheet" else "azimuths corrected from panorama (120 deg FOV, centre = boresight)"
-fig.suptitle(f"512-element (16x32, lambda/2) receive beam model, 28 GHz, {title_src}", fontsize=13, y=0.995)
+fig.suptitle(f"512-element (vertical 32 x horizontal 16, lambda/2) receive beam model, 3.5 GHz, {title_src}", fontsize=13, y=0.995)
 fig.savefig(f"beam_model_overview_{tag}.png", dpi=120, bbox_inches="tight")
 print(f"saved beam_model_overview_{tag}.png")
