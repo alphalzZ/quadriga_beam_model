@@ -1,0 +1,14 @@
+{
+  "input_files": 78,
+  "fit_files": 78,
+  "holdout_files": 0,
+  "angular_samples_per_file": 32760,
+  "total_fitted_samples": 2555280,
+  "receive_elements": 502,
+  "calibrated_rmse_db": 5.529505377453106e-17,
+  "calibrated_max_error_db": 7.105427357601002e-15,
+  "phase": "from physical baseline; not measured",
+  "polarization": "selectable ideal LHCP/RHCP; not measured",
+  "model": "all-data empirical beam-state residual calibration on physical baseline",
+  "geometry_identified_from_calibration": false
+}

@@ -1,0 +1,24 @@
+{
+  "rows": 41,
+  "cols": 17,
+  "sites": 502,
+  "ports": 502,
+  "footprint": "ellipse",
+  "lattice": "triangular",
+  "parameters": [
+    0.5448781752225309,
+    -0.06749614762956442,
+    0.010871329263618145,
+    1.0356714220780121e-15,
+    3.031685107358077
+  ],
+  "training_rmse_db": 0.0737871338581266,
+  "converged": true,
+  "evaluations": 4,
+  "frequency_hz": 1970000000.0,
+  "selection": "all 78 commands; no holdout",
+  "counting": "one RX/TX aperture has 502 elements, not 1004",
+  "baseline_high_gain_samples": 31413,
+  "calibration_floor_db": -80,
+  "final_fit": "independent 2D nodal dB residuals; all samples; zero regularization"
+}
