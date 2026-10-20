@@ -1,0 +1,235 @@
+[
+  {
+    "rows": 41,
+    "cols": 17,
+    "sites": 502,
+    "ports": 502,
+    "footprint": "ellipse",
+    "lattice": "triangular",
+    "parameters": [
+      0.5447110312148248,
+      -0.06325060645602387,
+      0.010443121558277202,
+      8.467137788871247e-15,
+      3.011661041974101
+    ],
+    "training_rmse_db": 0.09822064207102905,
+    "converged": true,
+    "evaluations": 4,
+    "frequency_hz": 1970000000.0,
+    "parameter_names": [
+      "spacing_lambda",
+      "rotation_deg",
+      "row_taper",
+      "col_taper",
+      "element_cos_power"
+    ],
+    "coordinate_convention": "theta from +z; phi from +x toward +y",
+    "counting": "~500 elements per RX or TX direction; polarization does not double count",
+    "polarization": "selectable ideal LHCP or RHCP; not measured",
+    "site_count_prior": [
+      450,
+      550
+    ],
+    "element_peak_gain_dbi_assumed": 0,
+    "selection": "training-only ellipse sweep then full-training refinement"
+  },
+  {
+    "rows": 40,
+    "cols": 16,
+    "sites": 460,
+    "ports": 460,
+    "footprint": "ellipse",
+    "lattice": "triangular",
+    "parameters": [
+      0.5758762276486519,
+      0.212360291750009,
+      0.09456132175607511,
+      7.860132333671836e-15,
+      2.9677727201416544
+    ],
+    "training_rmse_db": 0.11946922182737228,
+    "converged": true,
+    "evaluations": 6
+  },
+  {
+    "rows": 20,
+    "cols": 35,
+    "sites": 504,
+    "ports": 504,
+    "footprint": "ellipse",
+    "lattice": "triangular",
+    "parameters": [
+      0.543832823204632,
+      89.60743480424522,
+      8.126081944491478e-17,
+      0.013065455325015669,
+      3.0066244628722467
+    ],
+    "training_rmse_db": 0.12009603345034915,
+    "converged": true,
+    "evaluations": 7
+  },
+  {
+    "rows": 43,
+    "cols": 17,
+    "sites": 526,
+    "ports": 526,
+    "footprint": "ellipse",
+    "lattice": "triangular",
+    "parameters": [
+      0.5388907214375106,
+      -0.08053550368899737,
+      0.09988336428417618,
+      1.272492053338341e-20,
+      3.01122446395828
+    ],
+    "training_rmse_db": 0.13114761333472885,
+    "converged": true,
+    "evaluations": 7
+  },
+  {
+    "rows": 19,
+    "cols": 34,
+    "sites": 461,
+    "ports": 461,
+    "footprint": "ellipse",
+    "lattice": "triangular",
+    "parameters": [
+      0.5713683783073653,
+      89.91935996902325,
+      7.147271519541109e-14,
+      0.046999320596362866,
+      2.9931567939519694
+    ],
+    "training_rmse_db": 0.13685054568517474,
+    "converged": true,
+    "evaluations": 6
+  },
+  {
+    "rows": 20,
+    "cols": 36,
+    "sites": 520,
+    "ports": 520,
+    "footprint": "ellipse",
+    "lattice": "triangular",
+    "parameters": [
+      0.5394864747250943,
+      89.36269358721256,
+      3.378454255657479e-13,
+      0.06610467663637541,
+      2.9921491173799595
+    ],
+    "training_rmse_db": 0.14050591408504803,
+    "converged": true,
+    "evaluations": 5
+  },
+  {
+    "rows": 41,
+    "cols": 16,
+    "sites": 473,
+    "ports": 473,
+    "footprint": "ellipse",
+    "lattice": "triangular",
+    "parameters": [
+      0.5712143265143504,
+      -0.08926389981058827,
+      0.1340483811240167,
+      4.0199767924132696e-13,
+      2.980669520852571
+    ],
+    "training_rmse_db": 0.15049828635694623,
+    "converged": true,
+    "evaluations": 6
+  },
+  {
+    "rows": 19,
+    "cols": 35,
+    "sites": 472,
+    "ports": 472,
+    "footprint": "ellipse",
+    "lattice": "triangular",
+    "parameters": [
+      0.5682243913177558,
+      89.90495056202383,
+      3.188868506381059e-13,
+      0.09096370477730231,
+      3.022147737895485
+    ],
+    "training_rmse_db": 0.15555311809802447,
+    "converged": true,
+    "evaluations": 6
+  },
+  {
+    "rows": 20,
+    "cols": 37,
+    "sites": 530,
+    "ports": 530,
+    "footprint": "ellipse",
+    "lattice": "triangular",
+    "parameters": [
+      0.5375386294496083,
+      90.21569552782765,
+      6.792250155115005e-13,
+      0.10682771984139554,
+      3.011304792367911
+    ],
+    "training_rmse_db": 0.15738122933959203,
+    "converged": true,
+    "evaluations": 6
+  },
+  {
+    "rows": 19,
+    "cols": 36,
+    "sites": 487,
+    "ports": 487,
+    "footprint": "ellipse",
+    "lattice": "triangular",
+    "parameters": [
+      0.5642724642486665,
+      89.88087199162067,
+      3.7209185886971406e-13,
+      0.14851544346532347,
+      3.001877226401454
+    ],
+    "training_rmse_db": 0.20253810081508886,
+    "converged": true,
+    "evaluations": 6
+  },
+  {
+    "rows": 20,
+    "cols": 38,
+    "sites": 548,
+    "ports": 548,
+    "footprint": "ellipse",
+    "lattice": "triangular",
+    "parameters": [
+      0.5323101015381818,
+      90.16976827632146,
+      3.9186047882823083e-13,
+      0.1526229860126018,
+      3.0002597990843505
+    ],
+    "training_rmse_db": 0.20317561285885666,
+    "converged": true,
+    "evaluations": 6
+  },
+  {
+    "rows": 19,
+    "cols": 37,
+    "sites": 502,
+    "ports": 502,
+    "footprint": "ellipse",
+    "lattice": "triangular",
+    "parameters": [
+      0.5606611014612891,
+      89.84875758961387,
+      2.5346100787199373e-13,
+      0.20410734428224728,
+      2.9888230505834588
+    ],
+    "training_rmse_db": 0.25598970897093426,
+    "converged": true,
+    "evaluations": 6
+  }
+]

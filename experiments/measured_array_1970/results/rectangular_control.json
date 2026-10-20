@@ -1,0 +1,70 @@
+[
+  {
+    "rows": 32,
+    "cols": 16,
+    "sites": 512,
+    "ports": 512,
+    "lattice": "rectangular",
+    "parameters": [
+      0.5089753325140893,
+      0.9793640330388744,
+      7.050315004205126e-16,
+      0.1680448361824238,
+      3.245910929435801
+    ],
+    "training_rmse_db": 0.7834561004083453,
+    "converged": true,
+    "evaluations": 8
+  },
+  {
+    "rows": 16,
+    "cols": 32,
+    "sites": 512,
+    "ports": 512,
+    "lattice": "rectangular",
+    "parameters": [
+      0.5089753316407949,
+      90.97936518185469,
+      0.16804483084899524,
+      1.0870338035764768e-15,
+      3.245910894584618
+    ],
+    "training_rmse_db": 0.7834561004084558,
+    "converged": true,
+    "evaluations": 8
+  },
+  {
+    "rows": 15,
+    "cols": 34,
+    "sites": 510,
+    "ports": 510,
+    "lattice": "rectangular",
+    "parameters": [
+      0.5164977085780479,
+      91.14663825842584,
+      0.07482362115067596,
+      0.16395230266935898,
+      3.0411589756449593
+    ],
+    "training_rmse_db": 0.9070538006049049,
+    "converged": true,
+    "evaluations": 8
+  },
+  {
+    "rows": 34,
+    "cols": 15,
+    "sites": 510,
+    "ports": 510,
+    "lattice": "rectangular",
+    "parameters": [
+      0.5164977083612655,
+      1.1466389930662502,
+      0.16395231035862778,
+      0.07482361614715569,
+      3.041158945480642
+    ],
+    "training_rmse_db": 0.9070538006064319,
+    "converged": true,
+    "evaluations": 8
+  }
+]

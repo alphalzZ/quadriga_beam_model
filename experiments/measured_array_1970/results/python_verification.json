@@ -1,0 +1,10 @@
+{
+  "data_grid": true,
+  "alias_and_split_isolation": true,
+  "lattice_geometry": true,
+  "direct_vs_closed_AF": true,
+  "receive_steering": true,
+  "rx_element_count": true,
+  "optimizer_jacobian_relative_error": 1.9444155798183313e-10,
+  "cache_consistency": true
+}

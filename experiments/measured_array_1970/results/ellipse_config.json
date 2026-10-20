@@ -1,0 +1,35 @@
+{
+  "rows": 41,
+  "cols": 17,
+  "sites": 502,
+  "ports": 502,
+  "footprint": "ellipse",
+  "lattice": "triangular",
+  "parameters": [
+    0.5447110312148248,
+    -0.06325060645602387,
+    0.010443121558277202,
+    8.467137788871247e-15,
+    3.011661041974101
+  ],
+  "training_rmse_db": 0.09822064207102905,
+  "converged": true,
+  "evaluations": 4,
+  "frequency_hz": 1970000000.0,
+  "parameter_names": [
+    "spacing_lambda",
+    "rotation_deg",
+    "row_taper",
+    "col_taper",
+    "element_cos_power"
+  ],
+  "coordinate_convention": "theta from +z; phi from +x toward +y",
+  "counting": "~500 elements per RX or TX direction; polarization does not double count",
+  "polarization": "selectable ideal LHCP or RHCP; not measured",
+  "site_count_prior": [
+    450,
+    550
+  ],
+  "element_peak_gain_dbi_assumed": 0,
+  "selection": "training-only ellipse sweep then full-training refinement"
+}

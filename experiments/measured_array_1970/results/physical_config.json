@@ -1,0 +1,34 @@
+{
+  "rows": 17,
+  "cols": 29,
+  "sites": 493,
+  "ports": 493,
+  "lattice": "triangular",
+  "parameters": [
+    0.5605029128564815,
+    90.98583093263038,
+    0.19284185135762394,
+    4.794551829365081e-19,
+    3.3393040467278814
+  ],
+  "training_rmse_db": 0.7780565571540817,
+  "converged": true,
+  "evaluations": 2,
+  "frequency_hz": 1970000000.0,
+  "parameter_names": [
+    "spacing_lambda",
+    "rotation_deg",
+    "row_taper",
+    "col_taper",
+    "element_cos_power"
+  ],
+  "coordinate_convention": "theta from +z array normal; phi from +x toward +y",
+  "element_peak_gain_dbi_assumed": 0.0,
+  "polarization": "LHCP or RHCP selectable; not measured; one port per element per direction",
+  "counting": "about 500 RX elements plus about 500 TX elements; NOT 1000 RX elements",
+  "site_count_prior": [
+    450,
+    550
+  ],
+  "selection": "training loss only; no holdout tuning"
+}

@@ -1,0 +1,137 @@
+{
+  "files": 78,
+  "exact_duplicate_360_files": 6,
+  "unique_file_commands": 72,
+  "geometrically_unique_directions": 61,
+  "training_independent_directions": 19,
+  "training_sample_count": 2610,
+  "candidate_count": 147,
+  "parameters_within_5pct_loss": [
+    {
+      "rows": 17,
+      "cols": 29,
+      "sites": 493
+    },
+    {
+      "rows": 18,
+      "cols": 30,
+      "sites": 540
+    },
+    {
+      "rows": 34,
+      "cols": 15,
+      "sites": 510
+    },
+    {
+      "rows": 35,
+      "cols": 15,
+      "sites": 525
+    },
+    {
+      "rows": 17,
+      "cols": 28,
+      "sites": 476
+    },
+    {
+      "rows": 33,
+      "cols": 15,
+      "sites": 495
+    },
+    {
+      "rows": 33,
+      "cols": 14,
+      "sites": 462
+    },
+    {
+      "rows": 17,
+      "cols": 30,
+      "sites": 510
+    },
+    {
+      "rows": 16,
+      "cols": 29,
+      "sites": 464
+    },
+    {
+      "rows": 36,
+      "cols": 15,
+      "sites": 540
+    }
+  ],
+  "runtime": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0"
+  },
+  "train": {
+    "files": 30,
+    "high_gain_rmse_db": 0.2272952084871963,
+    "high_gain_solid_angle_rmse_db": 0.2444189545437485,
+    "above_minus20_rmse_db": 10.541935659024954,
+    "above_minus20_solid_angle_rmse_db": 11.180952815461099,
+    "full_clip40_rmse_db": 3.858838189512571,
+    "full_clip40_solid_angle_rmse_db": 2.653110807092576,
+    "full_clip65_rmse_db": 10.970960921816078,
+    "full_clip65_solid_angle_rmse_db": 10.174997992660288,
+    "peak_error_deg": 1.9921385079203858e-07,
+    "measured_radial_width_deg": 4.953397714961657,
+    "model_radial_width_deg": 4.948330855945172,
+    "measured_tangential_width_deg": 4.471579179581996,
+    "model_tangential_width_deg": 4.448355974914972
+  },
+  "holdout_pitch": {
+    "files": 24,
+    "high_gain_rmse_db": 0.2369855788205991,
+    "high_gain_solid_angle_rmse_db": 0.23537366922191308,
+    "above_minus20_rmse_db": 11.818564784486185,
+    "above_minus20_solid_angle_rmse_db": 11.29178519810472,
+    "full_clip40_rmse_db": 3.5936807695434987,
+    "full_clip40_solid_angle_rmse_db": 2.7026129685679092,
+    "full_clip65_rmse_db": 11.225080002111184,
+    "full_clip65_solid_angle_rmse_db": 10.405582337233339,
+    "peak_error_deg": 3.9994459720576486e-07,
+    "measured_radial_width_deg": 5.22618564412919,
+    "model_radial_width_deg": 5.206457157558864,
+    "measured_tangential_width_deg": 4.385572848818154,
+    "model_tangential_width_deg": 4.374906384923912
+  },
+  "holdout_azimuth": {
+    "files": 18,
+    "high_gain_rmse_db": 0.2555362710532502,
+    "high_gain_solid_angle_rmse_db": 0.25161589074257595,
+    "above_minus20_rmse_db": 11.345564882407347,
+    "above_minus20_solid_angle_rmse_db": 11.018248244828795,
+    "full_clip40_rmse_db": 3.7835591859404127,
+    "full_clip40_solid_angle_rmse_db": 2.8172842341828996,
+    "full_clip65_rmse_db": 11.28039803066773,
+    "full_clip65_solid_angle_rmse_db": 10.48427154076953,
+    "peak_error_deg": 0.13958362586819972,
+    "measured_radial_width_deg": 5.591387349238989,
+    "model_radial_width_deg": 5.533814477249439,
+    "measured_tangential_width_deg": 4.2712117506246265,
+    "model_tangential_width_deg": 4.27599487504433
+  },
+  "duplicate_360": {
+    "files": 6,
+    "high_gain_rmse_db": 0.23067457694663954,
+    "high_gain_solid_angle_rmse_db": 0.23709533706736916,
+    "above_minus20_rmse_db": 10.147434304462555,
+    "above_minus20_solid_angle_rmse_db": 10.753918530945631,
+    "full_clip40_rmse_db": 3.719068383384116,
+    "full_clip40_solid_angle_rmse_db": 2.602708384578825,
+    "full_clip65_rmse_db": 11.090465352921358,
+    "full_clip65_solid_angle_rmse_db": 10.480091873033702,
+    "peak_error_deg": 2.84591215417198e-07,
+    "measured_radial_width_deg": 3.721368017365555,
+    "model_radial_width_deg": 3.6829874850659645,
+    "measured_tangential_width_deg": 6.51718365181089,
+    "model_tangential_width_deg": 6.459014756008144
+  },
+  "holdout_mean_high_gain_rmse_db": 0.24493587549173526,
+  "holdout_mean_full_clip40_solid_angle_rmse_db": 2.7517577966886195,
+  "physical_main_beam_gate_passed": true,
+  "physical_full_pattern_gate_passed": false,
+  "quality": "main-beam approximation; full sidelobe/null reproduction not established",
+  "fixed_frame_peak_error_mean_deg": 0.1025643788654201,
+  "beam_centered_peak_error_mean_deg": 24.897435897435898
+}
