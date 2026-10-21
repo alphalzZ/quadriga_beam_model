@@ -1,5 +1,7 @@
 # QuaDRiGa 波束建模与链路仿真
 
+新手请先阅读 [入门 Handbook](doc/handbook.md)：从基础波束仿真、实测数据拟合到方向图导出和链路级仿真。原理与设计文档统一收录在 [doc/](doc/README.md)。
+
 按功能组织代码；每个模块维护自己的入口、说明和 `results/`，原始数据与共享函数单独保存。
 
 | 模块 | 用途 | 运行入口 |
@@ -15,6 +17,7 @@
 | [sheet 时域链路](experiments/measured_array_1970/time_domain/README.md) | 全数据拟合的 502 阵子、sheet 离轴 Pitch/Azimuth | `iface_allfit_time_domain.m` |
 
 ```text
+doc/                                  入门手册、原理与设计说明
 data/measured_patterns/                原始方向图及数据说明
 src/
   common/                              通用方向角、阵列权重、阵元增益函数
