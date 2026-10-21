@@ -7,6 +7,7 @@
 | [common](common/) | 数据读取、几何与指标、QuaDRiGa 物理阵列/实测等效波束适配 | `model.py`、`build_physical_array1970.m` |
 | [baseline_fit](baseline_fit/README.md) | 早期物理排布搜索、训练/留出比较 | `fit_model.py`、`fit_ellipse.py` |
 | [all_data_fit](all_data_fit/README.md) | 全部 78 份数据和全部采样点拟合 | `fit_all_data.py`、`build_allfit_beam1970.m` |
+| [pattern_xlsx](pattern_xlsx/README.md) | 14 个完整方向图的 Excel 文件及 ZIP | `export_sheet_pattern_grid.m`、`export_xlsx.py` |
 | [beam_patterns](beam_patterns/README.md) | 14 个 sheet 拟合波束极坐标切面与 PDF | `export_sheet_pattern_cuts.m`、`plot_sheet_polar.py` |
 | [time_domain](time_domain/README.md) | sheet 离轴 Pitch/Azimuth 驱动的时域 OFDM 链路 | `iface_allfit_time_domain.m` |
 

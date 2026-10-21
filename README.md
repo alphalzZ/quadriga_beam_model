@@ -10,6 +10,7 @@
 | [时域链路](src/link_time_domain/README.md) | 512 阵子时域卷积与逐采样波束合并 | `iface_demo_time_domain.m` |
 | [实测物理基线](experiments/measured_array_1970/baseline_fit/README.md) | 1.97 GHz 排布搜索及留出比较 | `fit_model.py`、`fit_ellipse.py` |
 | [全数据拟合](experiments/measured_array_1970/all_data_fit/README.md) | 全部 78 个扫描状态、全部方向图采样点拟合 | `fit_all_data.py` |
+| [sheet XLSX 方向图](experiments/measured_array_1970/pattern_xlsx/README.md) | 14 个完整半球方向图 Excel 导出与 ZIP | `export_sheet_pattern_grid.m`、`export_xlsx.py` |
 | [sheet 极坐标方向图](experiments/measured_array_1970/beam_patterns/README.md) | 14 个拟合波束的离轴/方位切面与 PDF | `export_sheet_pattern_cuts.m`、`plot_sheet_polar.py` |
 | [sheet 时域链路](experiments/measured_array_1970/time_domain/README.md) | 全数据拟合的 502 阵子、sheet 离轴 Pitch/Azimuth | `iface_allfit_time_domain.m` |
 
@@ -27,6 +28,7 @@ experiments/measured_array_1970/
   all_data_fit/                        全数据拟合及独立 results/
   time_domain/                         sheet 时域链路及独立 results/
   beam_patterns/                       sheet 极坐标切面及独立 results/
+  pattern_xlsx/                        sheet 完整方向图 XLSX 导出及独立 results/
 ```
 
 本次 sheet 链路直接使用用户确认的 `theta=ele_tab`、`phi=azi_tab`；13 个波束位于 0～50° 扫描范围内，仅 C9 的 50.37° 需要外推。完整 4×14 符号验证及逐波束结果见该模块说明。
