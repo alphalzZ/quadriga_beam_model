@@ -98,7 +98,7 @@ def main():
     for suffix, angles, gain, raw in [("theta", theta, tg, d["theta_gain_db"]),
                                       ("phi", phi, pg, d["phi_gain_db"])]:
         with (OUT / f"{suffix}_cuts.csv").open("w", newline="") as stream:
-            writer = csv.writer(stream)
+            writer = csv.writer(stream, lineterminator="\n")
             writer.writerow(["beam", "angle_deg", "model_gain_db", "normalized_gain_db"])
             for k, name in enumerate(names):
                 writer.writerows((name, f"{a:.6f}", f"{r:.8f}", f"{g:.8f}")
