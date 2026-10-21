@@ -1,0 +1,128 @@
+[
+  {
+    "beam": "C1",
+    "pitch_deg": 45.43,
+    "azimuth_deg": 188.62,
+    "extrapolated": false,
+    "normalization_db": -0.2448499002798194,
+    "theta_cut_peak_error_deg": 0.4299999999999997,
+    "phi_cut_peak_angular_error_deg": 0.27070932168549516
+  },
+  {
+    "beam": "C2",
+    "pitch_deg": 36.28,
+    "azimuth_deg": 184.66,
+    "extrapolated": false,
+    "normalization_db": -0.20921235470777533,
+    "theta_cut_peak_error_deg": 0.28000000000000114,
+    "phi_cut_peak_angular_error_deg": 0.20118862718981467
+  },
+  {
+    "beam": "C3",
+    "pitch_deg": 27.8,
+    "azimuth_deg": 195.4,
+    "extrapolated": false,
+    "normalization_db": -0.2108599692263596,
+    "theta_cut_peak_error_deg": 0.1999999999999993,
+    "phi_cut_peak_angular_error_deg": 0.1865543596882681
+  },
+  {
+    "beam": "C4",
+    "pitch_deg": 20.39,
+    "azimuth_deg": 191.44,
+    "extrapolated": false,
+    "normalization_db": -0.3416884305879106,
+    "theta_cut_peak_error_deg": 0.39000000000000057,
+    "phi_cut_peak_angular_error_deg": 0.15329938943067142
+  },
+  {
+    "beam": "C5",
+    "pitch_deg": 14.59,
+    "azimuth_deg": 222.23,
+    "extrapolated": false,
+    "normalization_db": -0.31097587860557446,
+    "theta_cut_peak_error_deg": 0.41000000000000014,
+    "phi_cut_peak_angular_error_deg": 0.057937068760445215
+  },
+  {
+    "beam": "C6",
+    "pitch_deg": 11.14,
+    "azimuth_deg": 290.9,
+    "extrapolated": false,
+    "normalization_db": -0.0561372033234908,
+    "theta_cut_peak_error_deg": 0.14000000000000057,
+    "phi_cut_peak_angular_error_deg": 0.01932069674956433
+  },
+  {
+    "beam": "C7",
+    "pitch_deg": 32.0,
+    "azimuth_deg": 357.42,
+    "extrapolated": false,
+    "normalization_db": -0.04778672566448302,
+    "theta_cut_peak_error_deg": 0.0,
+    "phi_cut_peak_angular_error_deg": 0.22256573259647394
+  },
+  {
+    "beam": "C8",
+    "pitch_deg": 41.55,
+    "azimuth_deg": 358.16,
+    "extrapolated": false,
+    "normalization_db": -0.2914726186121192,
+    "theta_cut_peak_error_deg": 0.5499999999999972,
+    "phi_cut_peak_angular_error_deg": 0.10612372196387553
+  },
+  {
+    "beam": "C9",
+    "pitch_deg": 50.37,
+    "azimuth_deg": 359.61,
+    "extrapolated": true,
+    "normalization_db": -0.19280787952177747,
+    "theta_cut_peak_error_deg": 0.36999999999999744,
+    "phi_cut_peak_angular_error_deg": 0.30036972336302964
+  },
+  {
+    "beam": "C10",
+    "pitch_deg": 12.93,
+    "azimuth_deg": 185.17,
+    "extrapolated": false,
+    "normalization_db": -0.07237183659921254,
+    "theta_cut_peak_error_deg": 0.07000000000000028,
+    "phi_cut_peak_angular_error_deg": 0.0380392664948704
+  },
+  {
+    "beam": "C11",
+    "pitch_deg": 2.29,
+    "azimuth_deg": 24.74,
+    "extrapolated": false,
+    "normalization_db": -0.26378652292474264,
+    "theta_cut_peak_error_deg": 0.29000000000000004,
+    "phi_cut_peak_angular_error_deg": 0.18934415469782412
+  },
+  {
+    "beam": "C12",
+    "pitch_deg": 8.82,
+    "azimuth_deg": 7.02,
+    "extrapolated": false,
+    "normalization_db": -0.18293607050127675,
+    "theta_cut_peak_error_deg": 0.17999999999999972,
+    "phi_cut_peak_angular_error_deg": 0.1502623794449718
+  },
+  {
+    "beam": "C13",
+    "pitch_deg": 15.58,
+    "azimuth_deg": 6.66,
+    "extrapolated": false,
+    "normalization_db": -0.43920319239442673,
+    "theta_cut_peak_error_deg": 0.41999999999999993,
+    "phi_cut_peak_angular_error_deg": 0.09131829867500844
+  },
+  {
+    "beam": "C14",
+    "pitch_deg": 23.35,
+    "azimuth_deg": 5.33,
+    "extrapolated": false,
+    "normalization_db": -0.3027472522530022,
+    "theta_cut_peak_error_deg": 0.3500000000000014,
+    "phi_cut_peak_angular_error_deg": 0.13079430730100597
+  }
+]
