@@ -8,7 +8,7 @@ function result = iface_allfit_time_domain(opts)
 if nargin < 1, opts = struct(); end
 assert(isstruct(opts) && isscalar(opts), 'opts must be a scalar struct');
 defaults = struct('qd_path',getenv('QD_PATH'), 'nSlot',4, 'nSym',14, ...
-    'nFFT',512, 'fd_half',16, 'seed',1, 'output_file','iface_allfit_time_domain_out.mat', ...
+    'nFFT',512, 'fd_half',16, 'seed',1, 'output_file',fullfile(fileparts(mfilename('fullpath')),'results','iface_allfit_time_domain_out.mat'), ...
     'polarization','RHCP','gain_offset_dbi',0);
 names = fieldnames(opts);
 for i = 1:numel(names)
@@ -31,21 +31,26 @@ assert(exist('qd_layout','file') ~= 0, ...
     'QuaDRiGa missing: set QD_PATH, opts.qd_path, or add its sources to the path');
 rng(opts.seed,'twister');
 
-%% Original 14 directions and UE geometry; fitted antenna and carrier.
-source_cache=fullfile(here,'..','..','..','src','beam_model_photo','beam_model_photo.mat');
+%% Sheet fixed-normal Pitch/Azimuth; fitted antenna and carrier.
+source_cache=fullfile(here,'..','..','..','src','beam_codebook','results','beam_model_sheet.mat');
+assert(exist(source_cache,'file')==2, 'Generate beam_model_sheet.mat with BEAM_ANGLE_SOURCE=sheet first');
 S=load(source_cache,'ele_tab','azi_tab','beam_name');
 ele=S.ele_tab;azi=S.azi_tab;K=numel(ele);
 [physical,calibrated,antenna]=make_allfit_link_arrays(ele,azi,opts.polarization,opts.gain_offset_dbi);
 fc=antenna.fc;N=antenna.N;Wq=antenna.Wq;perm=1:N;
 BS_H=25;UE_H=1.5;
-dh=(BS_H-UE_H)./tand(ele);
+% Intersect each world-frame beam ray with the UE plane. Pitch is measured
+% from the downward array normal, so horizontal range = height gap * tan(Pitch).
+ray_distance=(BS_H-UE_H)./(-antenna.U_world(3,:));
+ue_positions=bsxfun(@plus,[0;0;BS_H],bsxfun(@times,antenna.U_world,ray_distance));
+dh=sqrt(sum(ue_positions(1:2,:).^2,1));
 s=qd_simulation_parameters;
 s.center_frequency=fc;s.use_absolute_delays=0;s.show_progress_bars=0;
 l=qd_layout(s);l.no_tx=1;l.tx_position=[0;0;BS_H];
 l.tx_array=physical;l.tx_track.orientation=antenna.orientation;
 l.no_rx=K;l.rx_array=qd_arrayant('omni');
 for u=1:K
-    l.rx_position(:,u)=[dh(u)*cosd(azi(u));dh(u)*sind(azi(u));UE_H];
+    l.rx_position(:,u)=ue_positions(:,u);
 end
 l.set_scenario('3GPP_38.901_UMi_NLOS');
 % Same scatterer/phase realization for the element and calibrated beam models.
@@ -172,8 +177,8 @@ for u = 1:K
 end
 % Keep the last slot waveform for inspection; all slots share this static FIR.
 result = struct('h_ant',{h_ant},'h_beam_cal',{h_beam_cal},'h_delta',{h_delta}, ...
-    'antenna',antenna,'ele_tab',ele,'azi_tab',azi,'beam_name',{S.beam_name}, ...
-    'BS_H',BS_H,'UE_H',UE_H,'dh',dh,'N',N,'K',K,'nFull',nFull, ...
+    'source_cache',source_cache,'antenna',antenna,'ele_tab',ele,'azi_tab',azi,'beam_name',{S.beam_name}, ...
+    'BS_H',BS_H,'UE_H',UE_H,'ue_positions',ue_positions,'dh',dh,'N',N,'K',K,'nFull',nFull, ...
     'time_equivalence_error',time_equivalence_error,'noise_covariance',N0*(Wq'*Wq), ...
     'Wq',Wq,'perm',perm,'Heff',Heff, ...
     'g',g,'fc',fc,'Fs',Fs,'SCS',SCS,'nFFT',nFFT,'nCP',nCP,'nSC',nSC, ...
@@ -183,6 +188,8 @@ result = struct('h_ant',{h_ant},'h_beam_cal',{h_beam_cal},'h_delta',{h_delta}, .
     'fractional_delay_latency_samples',opts.fd_half,'opts',opts, ...
     'consistency_error',consistency_error,'tx_last',tx,'y_beam_last',y_beam);
 if ~isempty(opts.output_file)
+    output_parent=fileparts(opts.output_file);
+    if ~isempty(output_parent) && ~exist(output_parent,'dir'),mkdir(output_parent);end
     save(opts.output_file,'-struct','result','-v7');
     fprintf('Saved %s\n',opts.output_file);
 end

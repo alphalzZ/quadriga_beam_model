@@ -11,6 +11,8 @@ from scipy.io import savemat
 from scipy.optimize import least_squares
 
 from fit_model import training_samples, write_csv
+import sys
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'common'))
 from model import C0, FC, direction, geometry, load_data, metrics, predict, split
 
 OUT = Path(__file__).resolve().parent/"results"

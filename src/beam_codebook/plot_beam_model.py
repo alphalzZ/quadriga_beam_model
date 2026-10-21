@@ -1,4 +1,6 @@
 import csv, sys
+from pathlib import Path
+OUT=Path(__file__).resolve().parent/"results"
 import numpy as np
 import matplotlib
 matplotlib.use("Agg")
@@ -6,7 +8,7 @@ import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec
 
 tag = sys.argv[1] if len(sys.argv) > 1 else "sheet"
-rows = list(csv.DictReader(open(f"beam_summary_{tag}.csv")))
+rows = list(csv.DictReader(open(OUT/f"beam_summary_{tag}.csv")))
 names = [r["beam"] for r in rows]
 ele = np.array([float(r["ele_deg"]) for r in rows])          # downtilt
 azi = np.array([float(r["azi_deg"]) for r in rows])
@@ -14,8 +16,8 @@ dist = np.array([float(r["dist_m"]) for r in rows])
 gcmd = np.array([float(r["gain_at_cmd_dBi"]) for r in rows])
 gmax = np.array([float(r["gmax_dBi"]) for r in rows])
 mirror = np.array([float(r["mirror_az_deg"]) for r in rows])
-cuts = np.loadtxt(f"beam_cuts_az_{tag}.csv", delimiter=",")         # K x 361, total gain dBi
-xt = np.loadtxt(f"beam_crosstalk_{tag}.csv", delimiter=",")         # K x K
+cuts = np.loadtxt(OUT/f"beam_cuts_az_{tag}.csv", delimiter=",")         # K x 361, total gain dBi
+xt = np.loadtxt(OUT/f"beam_crosstalk_{tag}.csv", delimiter=",")         # K x K
 az_grid = np.arange(-180, 181, 1.0)
 wrap = lambda a: (a + 180) % 360 - 180
 az_w = wrap(azi)
@@ -75,5 +77,5 @@ fig.text(0.5, 0.005, "(c) total gain [dBi] vs azimuth at each beam's elevation (
          ha="center", fontsize=11)
 title_src = "spreadsheet azimuths" if tag == "sheet" else "azimuths corrected from panorama (120 deg FOV, centre = boresight)"
 fig.suptitle(f"512-element (vertical 32 x horizontal 16, lambda/2) receive beam model, 3.5 GHz, {title_src}", fontsize=13, y=0.995)
-fig.savefig(f"beam_model_overview_{tag}.png", dpi=120, bbox_inches="tight")
+fig.savefig(OUT/f"beam_model_overview_{tag}.png", dpi=120, bbox_inches="tight")
 print(f"saved beam_model_overview_{tag}.png")

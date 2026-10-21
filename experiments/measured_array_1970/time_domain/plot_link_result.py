@@ -40,7 +40,7 @@ def main():
         for r in group:
             axes[0].annotate(r["beam"],(float(r["fit_scan_phi_deg"]),float(r["fit_scan_theta_deg"])),xytext=(3,4),textcoords="offset points",fontsize=8)
     axes[0].axhline(50,color="gray",ls=":")
-    axes[0].set(xlabel="Canonical fitted scan azimuth [deg]",ylabel="Off-normal scan angle [deg]",title="Original world-frame directions are retained")
+    axes[0].set(xlabel="Canonical fitted scan azimuth [deg]",ylabel="Off-normal scan angle [deg]",title="Sheet directions, nadir-facing array")
     axes[0].legend(fontsize=8)
     covariance=data["noise_covariance"]
     normalized=abs(covariance)/np.sqrt(np.outer(np.real(np.diag(covariance)),np.real(np.diag(covariance))))

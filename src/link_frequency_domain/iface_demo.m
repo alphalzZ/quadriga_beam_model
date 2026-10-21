@@ -1,12 +1,15 @@
 % IFACE_DEMO  QuaDRiGa channel -> beam-domain effective channel -> multi-user
 %             uplink symbol transport -> per-beam MMSE -> BER, compared with SINR prediction
-QD_PATH = '/home/le-lei/workspace/quadriga_beam_model/QuaDRiGa';   % <- set to your QuaDRiGa install
+here=fileparts(mfilename('fullpath'));
+QD_PATH=getenv('QD_PATH');
+if isempty(QD_PATH),QD_PATH=fullfile(here,'..','..','QuaDRiGa');end
+out=fullfile(here,'results');if ~exist(out,'dir'),mkdir(out);end
 addpath(genpath(QD_PATH));
 more off;
 rand('state', 1); randn('state', 1);
 
 %% ---- beams (photo-corrected) -------------------------------------------
-S   = load('beam_model_photo.mat');             % beam weights from run_beam_model (angle_source='photo')
+S   = load(fullfile(here,'..','beam_codebook','results','beam_model_photo.mat'));             % beam weights from run_beam_model (angle_source='photo')
 fc  = S.fc;  W = S.W;  pm = S.p;  N = S.N;          % W: 512 x 14, unit-norm columns
 ele = S.ele_tab;  azi = S.azi_tab;  K = numel(ele);
 BS_H = 25;  UE_H = 1.5;
@@ -26,7 +29,7 @@ s.use_absolute_delays = 0;       % relative delays (UE timing advance removed)
 s.show_progress_bars  = 0;
 l = qd_layout(s);
 l.no_tx = 1;  l.tx_position = [0; 0; BS_H];
-l.tx_array = qd_arrayant('3gpp-3d', 16, 32, fc, 1);
+l.tx_array = qd_arrayant('3gpp-3d', 32, 16, fc, 1);
 l.no_rx = K;  l.rx_array = qd_arrayant('omni');
 for k = 1:K
     l.rx_position(:, k) = [dh(k)*cosd(azi(k)); dh(k)*sind(azi(k)); UE_H];
@@ -112,5 +115,5 @@ for u = 1:K
     fprintf('%2d  %7.1f  %10.1f  %13.4f  %16.4f  %9.4f\n', u, dh(u), ...
         10*log10(mean(sinr(u,:))), ber_pred(u), ber_pred_snr(u), ber_meas(u));
 end
-save('-v7', 'iface_out.mat', 'Heff', 'g', 'Psc', 'N0', 'nSC', 'nSym', 'SCS', 'ber_pred', 'ber_meas', 'sinr');
+save('-v7', fullfile(out,'iface_out.mat'), 'Heff', 'g', 'Psc', 'N0', 'nSC', 'nSym', 'SCS', 'ber_pred', 'ber_meas', 'sinr');
 printf('saved iface_out.mat\n');

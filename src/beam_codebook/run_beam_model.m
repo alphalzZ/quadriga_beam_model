@@ -4,6 +4,8 @@ more off;
 here = fileparts(mfilename('fullpath'));
 if isempty(here), here = pwd; end
 addpath(here);
+addpath(fullfile(here,'..','common'));
+out=fullfile(here,'results');if ~exist(out,'dir'),mkdir(out);end
 
 %% ---- inputs -------------------------------------------------------------
 fc      = 3.5e9;          % carrier frequency [Hz]; element spacing = lambda/2
@@ -18,7 +20,10 @@ ele_tab   = [45.43 36.28 27.8 20.39 14.59 11.14 32 41.55 50.37 12.93 2.29 8.82 1
 azi_tab   = [188.62 184.66 195.4 191.44 222.23 290.9 357.42 358.16 359.61 185.17 24.74 7.02 6.66 5.33];
 
 % ---- angle source: 'sheet' = spreadsheet azimuths, 'photo' = azimuth read from panorama
-angle_source = 'photo';
+% Select with BEAM_ANGLE_SOURCE=sheet; default remains photo.
+angle_source = getenv('BEAM_ANGLE_SOURCE');
+if isempty(angle_source), angle_source = 'photo'; end
+assert(any(strcmp(angle_source, {'photo','sheet'})), 'BEAM_ANGLE_SOURCE must be photo or sheet');
 px_label = [1497 1392 1225 1137 884 690 268 178 93 1012 787 688 583 483];  % label x-pixel in panorama
 F_photo  = 120;      % assumed horizontal FOV of the panorama [deg]
 W_photo  = 1602;     % panorama width [px]
@@ -122,14 +127,14 @@ fprintf('Beams whose global gain maximum is NOT at the commanded direction (>5 d
     strjoin(beam_name(abs(angle_diff_deg(pk_az, az_req)) > 5 | abs(pk_el - el_req) > 5), ', '));
 
 %% ---- export ----------------------------------------------------------------
-save('-v7', fullfile(here, ['beam_model_' tag '.mat']), 'W', 'U', 'p', 'fc', 'N', 'beam_name', 'ele_tab', 'azi_tab', 'XT', 'XT_af');
-fid = fopen(fullfile(here, ['beam_summary_' tag '.csv']),'w');
+save('-v7', fullfile(out, ['beam_model_' tag '.mat']), 'W', 'U', 'p', 'fc', 'N', 'beam_name', 'ele_tab', 'azi_tab', 'XT', 'XT_af');
+fid = fopen(fullfile(out, ['beam_summary_' tag '.csv']),'w');
 fprintf(fid, 'beam,ele_deg,azi_deg,dist_m,gain_at_cmd_dBi,gmax_dBi,azmax_deg,elmax_deg,bw_az_deg,bw_el_deg,nbr_beam,xtalk_dB,mirror_az_deg\n');
 for k = 1:K
     fprintf(fid, '%s,%.2f,%.2f,%.1f,%.2f,%.2f,%.1f,%.1f,%d,%d,%s,%.1f,%.1f\n', beam_name{k}, ele_tab(k), azi_tab(k), ...
         dist_impl(k), G_peak(k), pk_G(k), pk_az(k), pk_el(k), bw_az(k), bw_el(k), beam_name{worst_j(k)}, worst_xt(k), az_mirror(k));
 end
 fclose(fid);
-dlmwrite(fullfile(here, ['beam_cuts_az_' tag '.csv']), cutAz, 'precision', '%.3f');
-dlmwrite(fullfile(here, ['beam_crosstalk_' tag '.csv']), XT, 'precision', '%.2f');
+dlmwrite(fullfile(out, ['beam_cuts_az_' tag '.csv']), cutAz, 'precision', '%.3f');
+dlmwrite(fullfile(out, ['beam_crosstalk_' tag '.csv']), XT, 'precision', '%.2f');
 printf('\nSaved files with tag %s\n', tag);

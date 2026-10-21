@@ -5,6 +5,7 @@ function a = make_cp_arrayant(model,step_deg)
 % Requires QuaDRiGa on the path. Geometry and port order are copied exactly.
 % Fa/Fb are synthesized ideal CP fields, not measured crossed-dipole patterns.
 % Each co-located CP port is stored as one effective element, identity coupling.
+addpath(fullfile(fileparts(mfilename('fullpath')),'..','common'));
 if nargin<2, step_deg=5; end
 assert(isnumeric(step_deg) && isscalar(step_deg) && isfinite(step_deg) && ...
     step_deg>0 && step_deg<=10 && abs(90/step_deg-round(90/step_deg))<1e-10, ...

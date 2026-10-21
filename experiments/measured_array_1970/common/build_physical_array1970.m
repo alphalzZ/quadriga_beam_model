@@ -9,7 +9,7 @@ function [a, meta] = build_physical_array1970(beam_index, model_path, step_deg, 
 % Element gain scale is ASSUMED 0 dBi; normalized data cannot determine it.
 if nargin<1, beam_index=1; end
 if nargin<2 || isempty(model_path)
-    model_path=fullfile(fileparts(mfilename('fullpath')),'results','ellipse_physical_model.mat');
+    model_path=fullfile(fileparts(mfilename('fullpath')),'..','baseline_fit','results','ellipse_physical_model.mat');
 end
 if nargin<3, step_deg=1; end
 if nargin<4, polarization='RHCP'; end

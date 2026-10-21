@@ -10,6 +10,8 @@ import scipy
 from scipy.io import savemat
 from scipy.optimize import least_squares
 
+import sys
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'common'))
 from model import (FC, THETA, UV, direction, geometry, load_data, metrics,
                    predict, relative_db, split)
 

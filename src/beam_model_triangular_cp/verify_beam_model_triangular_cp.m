@@ -32,7 +32,7 @@ assert(max(abs(diag(D.Gx)-512))<1e-8);
 % Rectangular compatibility with the independently generated legacy cache.
 rect = rh; rect.lattice='rectangular';
 Q = run_beam_model_triangular_cp(rect);
-old = load(fullfile(fileparts(mfilename('fullpath')),'beam_model_photo.mat'));
+old = load(fullfile(fileparts(mfilename('fullpath')),'..','beam_codebook','results','beam_model_photo.mat'));
 assert(old.fc==Q.fc && norm(old.p-Q.p,'fro')<1e-12);
 assert(norm(old.W-Q.W,'fro')<1e-10);
 bad = base; bad.lattice='not-a-lattice';

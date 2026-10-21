@@ -13,7 +13,7 @@ function result = iface_demo_time_domain(opts)
 if nargin < 1, opts = struct(); end
 assert(isstruct(opts) && isscalar(opts), 'opts must be a scalar struct');
 defaults = struct('qd_path',getenv('QD_PATH'), 'nSlot',4, 'nSym',14, ...
-    'nFFT',512, 'fd_half',16, 'seed',1, 'output_file','iface_time_domain_out.mat');
+    'nFFT',512, 'fd_half',16, 'seed',1, 'output_file',fullfile(fileparts(mfilename('fullpath')),'results','iface_time_domain_out.mat'));
 names = fieldnames(opts);
 for i = 1:numel(names)
     assert(isfield(defaults,names{i}), ['Unknown option: ' names{i}]);
@@ -36,7 +36,7 @@ assert(exist('qd_layout','file') ~= 0, ...
 rng(opts.seed,'twister');
 
 %% Array and reciprocal, static channel (one snapshot, no Doppler).
-S = load(fullfile(here,'beam_model_photo.mat'));
+S = load(fullfile(here,'..','beam_codebook','results','beam_model_photo.mat'));
 fc = 3.5e9; Mv = 32; Mh = 16; N = Mv*Mh; K = numel(S.ele_tab);
 assert(isscalar(S.fc) && abs(S.fc-fc) < 1 && S.N == N, ...
     'Beam cache must use 3.5 GHz and 512 ports; rerun run_beam_model.m');
@@ -184,6 +184,8 @@ result = struct('h_ant',{h_ant},'Wq',Wq,'perm',perm,'Heff',Heff, ...
     'fractional_delay_latency_samples',opts.fd_half,'opts',opts, ...
     'consistency_error',consistency_error,'tx_last',tx,'y_beam_last',y_beam);
 if ~isempty(opts.output_file)
+    output_parent=fileparts(opts.output_file);
+    if ~isempty(output_parent) && ~exist(output_parent,'dir'),mkdir(output_parent);end
     save(opts.output_file,'-struct','result','-v7');
     fprintf('Saved %s\n',opts.output_file);
 end

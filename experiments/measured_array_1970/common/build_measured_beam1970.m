@@ -15,7 +15,7 @@ assert(isscalar(pitch) && any(pitch==0:10:50));
 assert(isscalar(azimuth) && any(azimuth==0:30:360));
 assert(isscalar(peak_gain_dbi) && isfinite(peak_gain_dbi));
 here=fileparts(mfilename('fullpath'));
-source=fullfile(here,'..','..','data','measured_patterns', ...
+source=fullfile(here,'..','..','..','data','measured_patterns', ...
     sprintf('pattern_Pitch_%d_Azimuth_%d.txt',pitch,azimuth));
 raw=dlmread(source,'\t',6,0);
 assert(isequal(size(raw),[91 361]) && all(raw(:,1)==(0:90).'));

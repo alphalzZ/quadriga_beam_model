@@ -14,9 +14,10 @@ function model = run_beam_model_triangular_cp(opts)
 % are receive-response patterns, not a full satellite propagation model.
 if nargin < 1, opts = struct(); end
 here = fileparts(mfilename('fullpath'));
+addpath(fullfile(here,'..','common'));
 cfg = struct('fc',3.5e9,'Mv',32,'Mh',16,'spacing_lambda',0.5, ...
     'lattice','triangular','polarization','RHCP','angle_source','photo', ...
-    'grid_step_deg',1,'output_dir',here);
+    'grid_step_deg',1,'output_dir',fullfile(here,'results'));
 assert(isstruct(opts) && isscalar(opts), 'opts must be a scalar struct');
 names = fieldnames(opts);
 for i = 1:numel(names)

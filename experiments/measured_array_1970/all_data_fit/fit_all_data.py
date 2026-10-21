@@ -15,7 +15,8 @@ import numpy as np
 from scipy.io import savemat
 
 PARENT=Path(__file__).resolve().parents[1]
-sys.path.insert(0,str(PARENT))
+sys.path.insert(0,str(PARENT/'common'))
+sys.path.insert(0,str(PARENT/'baseline_fit'))
 from fit_ellipse import fit
 from model import C0, FC, THETA, UV, direction, geometry, load_data
 
@@ -43,7 +44,7 @@ def fields(config,pitch,azimuth):
 def main():
     OUT.mkdir(parents=True,exist_ok=True)
     records=load_data()
-    initial=json.loads((PARENT/"results/ellipse_config.json").read_text())
+    initial=json.loads((PARENT/"baseline_fit/results/ellipse_config.json").read_text())
     xs=[];ts=[];ps=[];ys=[]
     for r in records:
         # No command is excluded, including 360 aliases and broadside repeats.

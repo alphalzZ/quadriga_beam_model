@@ -1,9 +1,9 @@
 function report=verify_quadriga1970(qd_path)
 %VERIFY_QUADRIGA1970 Test measured power import, physical fields and RX combining.
 if nargin>0 && ~isempty(qd_path), addpath(genpath(qd_path)); end
-here=fileparts(mfilename('fullpath')); addpath(here);
+here=fileparts(mfilename('fullpath')); addpath(here);addpath(fullfile(here,'..','common'));
 M=load(fullfile(here,'results','ellipse_physical_model.mat'));
-files=dir(fullfile(here,'..','..','data','measured_patterns','pattern_*.txt'));
+files=dir(fullfile(here,'..','..','..','data','measured_patterns','pattern_*.txt'));
 assert(numel(files)==78);
 [theta,phi]=ndgrid(0:90,0:359);
 az=phi(:).'*pi/180; el=(90-theta(:).')*pi/180;

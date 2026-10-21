@@ -5,7 +5,7 @@
 ## 运行与配置
 
 ```matlab
-addpath('/path/to/quadriga_beam_model/src/beam_model_photo');
+addpath('/path/to/quadriga_beam_model/src/beam_model_triangular_cp');
 
 % 默认：3.5 GHz，纵向 32 行、横向 16 列，三角栅格、RHCP。
 model = run_beam_model_triangular_cp();
@@ -30,7 +30,7 @@ model = run_beam_model_triangular_cp(struct( ...
 | `polarization` | `'RHCP'` | `'LHCP'`、`'RHCP'` 或 `'DUAL'` |
 | `angle_source` | `'photo'` | `'photo'` 或原表格的 `'sheet'` 方位角 |
 | `grid_step_deg` | `1` | 方向图扫描步长，需整除 180 且不超过 10° |
-| `output_dir` | 脚本所在目录 | 输出位置；`''` 表示仅返回结果、不写文件 |
+| `output_dir` | 本模块 `results/` | 输出位置；`''` 表示仅返回结果、不写文件 |
 
 默认输出前缀为 `beam_model_triangular_rhcp`，包括 MAT 缓存、波束统计 `_summary.csv`、方位切片 `_cuts.csv`、串扰 `_crosstalk.csv` 和空间坐标 `_sites.csv`。其他栅格、极化使用独立前缀。不同频率、行列数或角度来源使用相同栅格/极化时，应指定不同 `output_dir` 以保留多份结果。
 

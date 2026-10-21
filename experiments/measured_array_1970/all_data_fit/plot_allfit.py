@@ -11,7 +11,7 @@ import numpy as np
 from scipy.io import loadmat
 
 HERE=Path(__file__).resolve().parent
-sys.path.insert(0,str(HERE.parent))
+sys.path.insert(0,str(HERE.parent/'common'))
 from model import load_data, great_circle_cut
 
 

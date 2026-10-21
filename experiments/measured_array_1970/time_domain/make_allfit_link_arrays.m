@@ -1,7 +1,9 @@
 function [physical,calibrated,info]=make_allfit_link_arrays(ele_deg,azi_deg,polarization,gain_offset_dbi)
 %MAKE_ALLFIT_LINK_ARRAYS 502 element baseline and 14 calibrated beam outputs.
-% World broadside is +x. Canonical fitted broadside is +z. Use BS track
-% orientation [0;-pi/2;0], corresponding to R=[0 0 1;0 1 0;-1 0 0].
+% Canonical fitted broadside is +z; assume a nadir-facing array in the world.
+% Bank pi maps +z to -z: R=diag([1 -1 -1]), orientation [pi;0;0].
+% Spreadsheet ele is measured off-normal Pitch: theta=ele, phi=azi.
+% Construct in this fixed canonical frame, then rotate into world coordinates.
 % Measured scan commands are interpolated in LINEAR POWER after transporting
 % each corner pattern by the minimal 3D rotation from its command to target.
 % Outside the measured 0..50 degree scan range, transport the boundary pattern;
@@ -13,15 +15,16 @@ ele_deg=reshape(ele_deg,1,[]);azi_deg=reshape(azi_deg,1,[]);
 assert(numel(ele_deg)==numel(azi_deg) && all(isfinite([ele_deg azi_deg])));
 assert(isscalar(gain_offset_dbi) && isfinite(gain_offset_dbi));
 here=fileparts(mfilename('fullpath'));parent=fileparts(here);
-addpath(parent);addpath(fullfile(parent,'all_data_fit'));
+addpath(fullfile(parent,'common'));addpath(fullfile(parent,'all_data_fit'));
 model_path=fullfile(parent,'all_data_fit','results','physical_baseline.mat');
 M=load(model_path);N=M.Nsite;
 assert(M.fc==1.97e9 && N==502);
 physical=build_physical_array1970([],model_path,1,polarization);
-R=[0 0 1;0 1 0;-1 0 0];
-U_world=[cosd(ele_deg).*cosd(azi_deg);cosd(ele_deg).*sind(azi_deg);-sind(ele_deg)];
-U=R.'*U_world;
-theta=acosd(max(-1,min(1,U(3,:))));phi=mod(atan2d(U(2,:),U(1,:)),360);
+R=diag([1 -1 -1]);
+assert(all(ele_deg>=0 & ele_deg<90), 'Pitch must lie in the front hemisphere [0,90)');
+theta=ele_deg;phi=mod(azi_deg,360);
+U=[sind(theta).*cosd(phi);sind(theta).*sind(phi);cosd(theta)];
+U_world=R*U;
 K=numel(theta);
 W=bsxfun(@times,M.taper(:),exp(2j*pi*M.fc/299792458*(M.p_site.'*U)))/norm(M.taper);
 assert(max(abs(sum(abs(W).^2,1)-1))<1e-12);
@@ -72,7 +75,7 @@ end
 calibrated.Fa=Fa;calibrated.Fb=Fb;
 calibrated.element_position=zeros(3,K);calibrated.coupling=eye(K);
 info=struct('fc',M.fc,'N',N,'K',K,'p_canonical',M.p_site,'p_world',R*M.p_site, ...
-    'rotation',R,'orientation',[0;-pi/2;0],'Wq',W,'U_canonical',U,'U_world',U_world, ...
+    'rotation',R,'orientation',[pi;0;0],'Wq',W,'U_canonical',U,'U_world',U_world, ...
     'scan_theta_deg',theta,'scan_phi_deg',phi,'extrapolated',theta>50+1e-10, ...
     'corner_commands',{corner_commands},'corner_weights',{corner_weights}, ...
     'power_grid',power_grid,'az_grid_deg',az,'el_grid_deg',el, ...

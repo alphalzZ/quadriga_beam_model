@@ -1,1 +1,1 @@
-{"polarization":"LHCP","slots":1,"symbols_per_slot":1,"receive_elements":502,"bits_per_user":576,"time_equivalence_error":1.0370618376272759e-14,"time_frequency_consistency_error":9.317969826293974e-15}
+{"source_cache":"beam_model_sheet.mat","sheet_angle_convention":"fixed-normal Pitch/Azimuth","polarization":"LHCP","slots":1,"symbols_per_slot":1,"receive_elements":502,"bits_per_user":576,"time_equivalence_error":1.7228124177117159e-14,"time_frequency_consistency_error":1.43852490496354e-14}

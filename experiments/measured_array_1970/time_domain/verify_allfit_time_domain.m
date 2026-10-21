@@ -5,9 +5,9 @@ here=fileparts(mfilename('fullpath'));addpath(here);addpath(genpath(qd_path));
 out=fullfile(here,'results');if ~exist(out,'dir'),mkdir(out);end
 
 % A measured scan node must be preserved exactly before layout orientation.
-R=[0 0 1;0 1 0;-1 0 0];
+R=diag([1 -1 -1]);
 u0=[sind(20)*cosd(30);sind(20)*sind(30);cosd(20)];world=R*u0;
-ele=-asind(world(3));azi=atan2d(world(2),world(1));
+ele=20;azi=30;
 [~,node,ni]=make_allfit_link_arrays(ele,azi,'RHCP',0);
 source=fullfile(here,'..','..','..','data','measured_patterns','pattern_Pitch_20_Azimuth_30.txt');
 raw=dlmread(source,'\t',6,0);target=raw(:,2:end);
@@ -27,7 +27,7 @@ assert(norm(li.Wq-ni.Wq)<1e-12);
 
 % Run unchanged defaults: 4 slots x 14 symbols, 288 subcarriers, FFT=512.
 r=iface_allfit_time_domain(struct('qd_path',qd_path,'output_file',waveform_file));
-source_cache=fullfile(here,'..','..','..','src','beam_model_photo','beam_model_photo.mat');
+source_cache=fullfile(here,'..','..','..','src','beam_codebook','results','beam_model_sheet.mat');
 S=load(source_cache);
 assert(r.fc==1.97e9 && r.N==502 && r.K==14);
 assert(isequal(r.ele_tab,S.ele_tab) && isequal(r.azi_tab,S.azi_tab));
@@ -35,7 +35,21 @@ assert(r.nSlot==4 && r.nSym==14 && r.nSC==288 && r.nFFT==512 && r.SCS==120e3);
 assert(r.nFull==3168 && r.BS_H==25 && r.UE_H==1.5 && r.opts.fd_half==16);
 assert(all(r.tot==32256) && all(isfinite(r.ber_meas)) && all(r.ber_meas>=0 & r.ber_meas<=1));
 assert(r.consistency_error<1e-10 && r.time_equivalence_error<1e-10);
-assert(isequal(find(r.antenna.extrapolated),[1 2 8 9]));
+assert(max(abs(r.antenna.scan_theta_deg-S.ele_tab))<1e-10);
+assert(max(abs(angle_diff(r.antenna.scan_phi_deg,mod(S.azi_tab,360))))<1e-10);
+assert(isequal(r.antenna.extrapolated,S.ele_tab>50));
+assert(isequal(find(r.antenna.extrapolated),9));
+assert(all(r.antenna.U_canonical(3,:)>0));
+assert(max(abs(r.dh-(r.BS_H-r.UE_H)*tand(S.ele_tab)))<1e-10);
+assert(max(abs(r.ue_positions(3,:)-r.UE_H))<1e-10);
+rays=bsxfun(@minus,r.ue_positions,[0;0;r.BS_H]);
+rays=bsxfun(@rdivide,rays,sqrt(sum(rays.^2,1)));
+assert(norm(rays-r.antenna.U_world,'fro')<1e-12);
+% Check QuaDRiGa actually applies the same orientation (including the bank).
+uw=r.antenna.U_world;
+[~,~,~,az_local,el_local]=node.interpolate(atan2(uw(2,:),uw(1,:)),asin(uw(3,:)),[],r.antenna.orientation);
+assert(max(abs(el_local-(pi/2-r.antenna.scan_theta_deg*pi/180)))<1e-10);
+assert(max(abs(angle_diff(az_local*180/pi,r.antenna.scan_phi_deg)))<1e-8);
 assert(norm(r.antenna.rotation*r.antenna.U_canonical-r.antenna.U_world,'fro')<1e-12);
 assert(norm(r.antenna.p_world-r.antenna.rotation*r.antenna.p_canonical,'fro')<1e-12);
 
@@ -69,9 +83,10 @@ report=struct('fc_hz',r.fc,'receive_elements',r.N,'beams',r.K,'users',r.K, ...
     'time_domain_equivalence_error',r.time_equivalence_error, ...
     'time_frequency_consistency_error',r.consistency_error, ...
     'noise_covariance_relative_error',noise_covariance_error, ...
-    'extrapolated_beams',[1 2 8 9],'gain_offset_dbi',r.opts.gain_offset_dbi, ...
+    'source_cache','beam_model_sheet.mat','array_normal_world',[0 0 -1], ...
+    'extrapolated_beams',find(r.antenna.extrapolated),'gain_offset_dbi',r.opts.gain_offset_dbi, ...
     'antenna_phase_is_measured',false,'output_noise_model','unit-norm element combining', ...
-    'original_directions_preserved',true,'original_waveform_parameters_preserved',true);
+    'sheet_angle_convention','fixed-normal Pitch/Azimuth','sheet_directions_preserved',true,'original_waveform_parameters_preserved',true);
 fid=fopen(fullfile(out,'validation.json'),'w');assert(fid>=0);
 fprintf(fid,'%s\n',jsonencode(report));fclose(fid);
 fid=fopen(fullfile(out,'beam_metrics.csv'),'w');assert(fid>=0);
@@ -85,4 +100,8 @@ end
 fclose(fid);
 save(fullfile(out,'receiver_reference.mat'),'-struct','r','Heff','sinr','ber_pred','ber_meas','Wq','noise_covariance','-v7');
 disp(report);fprintf('PASS: directions, calibrated TD transport, default link, and noise model\n');
+end
+
+function d=angle_diff(a,b)
+d=mod(a-b+180,360)-180;
 end

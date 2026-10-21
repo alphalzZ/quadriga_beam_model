@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+.DS_Store
+**/results/iface_time_domain_out.mat
+**/results/iface_allfit_time_domain_out.mat

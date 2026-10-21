@@ -10,7 +10,7 @@ import numpy as np
 
 
 def main():
-    prefix = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("beam_model_triangular_rhcp")
+    prefix = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(__file__).resolve().parent/"results"/"beam_model_triangular_rhcp"
     with Path(f"{prefix}_summary.csv").open() as stream:
         rows = list(csv.DictReader(stream))
     sites = np.atleast_2d(np.loadtxt(f"{prefix}_sites.csv", delimiter=","))

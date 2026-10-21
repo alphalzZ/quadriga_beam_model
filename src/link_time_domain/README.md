@@ -3,20 +3,20 @@
 入口是 `iface_demo_time_domain.m`，采用带配置参数的 MATLAB/Octave 函数形式。
 
 ```matlab
-addpath('/path/to/quadriga_beam_model/src/beam_model_photo');
+addpath('/path/to/quadriga_beam_model/src/link_time_domain');
 result = iface_demo_time_domain(struct( ...
     'qd_path', '/path/to/QuaDRiGa', ...
     'nSlot', 4, ...
     'output_file', '/tmp/iface_time_domain_out.mat'));
 ```
 
-也可以设置环境变量 `QD_PATH`，或提前将 QuaDRiGa 加入 MATLAB/Octave 路径，然后直接运行 `result = iface_demo_time_domain();`。波束文件始终从函数所在目录读取；结果默认保存到当前工作目录的 `iface_time_domain_out.mat`。无需修改原来的 `iface_demo.m`。
+也可以设置环境变量 `QD_PATH`，或提前将 QuaDRiGa 加入 MATLAB/Octave 路径，然后直接运行 `result = iface_demo_time_domain();`。波束文件从 `../beam_codebook/results/beam_model_photo.mat` 读取；结果默认保存到本模块的 `results/iface_time_domain_out.mat`。无需修改原来的 `iface_demo.m`。
 
 本云环境可运行：
 
 ```bash
 cd /workspace/.cloud-setup/validation
-/workspace/.cloud-setup/bin/octave --quiet --eval "addpath('/workspace/quadriga_beam_model/src/beam_model_photo'); iface_demo_time_domain(struct('qd_path','/workspace/.cloud-setup/deps/QuaDRiGa'));"
+/workspace/.cloud-setup/bin/octave --quiet --eval "addpath('/workspace/quadriga_beam_model/src/link_time_domain'); iface_demo_time_domain(struct('qd_path','/workspace/.cloud-setup/deps/QuaDRiGa'));"
 ```
 
 ## 链路处理

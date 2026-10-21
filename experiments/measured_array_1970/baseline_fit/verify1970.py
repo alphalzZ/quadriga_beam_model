@@ -8,6 +8,8 @@ from scipy.io import loadmat
 
 from fit_ellipse import DiscreteObjective
 from fit_model import training_samples
+import sys
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'common'))
 from model import C0, FC, array_factor, direction, geometry, load_data, split
 
 
