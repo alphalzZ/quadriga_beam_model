@@ -1,0 +1,155 @@
+findfont: Failed to find font weight normal for WenQuanYi Zen Hei, now using 500.
+/home/user/quadriga_beam_model/experiments/measured_array_1970/interp_validation/validate_four_neighbor_interp.py:329: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+  fig.tight_layout()
+findfont: Failed to find font weight normal for WenQuanYi Zen Hei, now using 500.
+findfont: Failed to find font weight normal for WenQuanYi Zen Hei, now using 500.
+findfont: Failed to find font weight normal for WenQuanYi Zen Hei, now using 500.
+findfont: Failed to find font weight normal for WenQuanYi Zen Hei, now using 500.
+{
+  "table_vs_txt_max_abs_db": 7.105427357601002e-15,
+  "octave_parity": {
+    "max_abs_diff_linear": 4.9960036108132044e-15,
+    "peak_linear_octave": 0.9472780460224184
+  },
+  "n_held_out_cases": 48,
+  "aggregate": {
+    "transport_linear": {
+      "rms_db_hemisphere": {
+        "median": 6.318003421118579,
+        "worst": 8.543437137286388
+      },
+      "rms_db_within_m10": {
+        "median": 0.2528785225610185,
+        "worst": 0.49430746381139173
+      },
+      "rms_db_within_m3": {
+        "median": 0.11137501568259386,
+        "worst": 0.2290762918239495
+      },
+      "rms_db_m20_to_m10": {
+        "median": 0.9620876259122475,
+        "worst": 2.937763611067593
+      },
+      "rms_db_m40_to_m20": {
+        "median": 4.5509579179840856,
+        "worst": 6.840082488262497
+      },
+      "rms_db_below_m40": {
+        "median": 6.567890426023238,
+        "worst": 8.998374393324774
+      },
+      "bias_db_within_m10": {
+        "median": 0.0841887984347845,
+        "worst": 0.1480541401678564
+      },
+      "max_abs_db_within_m10": {
+        "median": 0.9933233929169782,
+        "worst": 1.7683500681915252
+      },
+      "peak_level_err_db": {
+        "median": -0.00497410920864459,
+        "worst": -0.05465174331357853
+      },
+      "peak_dir_err_deg": {
+        "median": 4.2688682312579694e-07,
+        "worst": 1.0000000000002647
+      },
+      "beam3db_solid_angle_ratio": {
+        "median": 1.0,
+        "worst": 1.0396578032213482
+      },
+      "beam3db_iou": {
+        "median": 0.9711834256820139,
+        "worst": 1.0
+      }
+    },
+    "db_average_no_transport": {
+      "rms_db_hemisphere": {
+        "median": 6.651813551747104,
+        "worst": 8.059140216776484
+      },
+      "rms_db_within_m10": {
+        "median": 29.463252816951467,
+        "worst": 34.43924908426915
+      },
+      "rms_db_within_m3": {
+        "median": 32.32246591628943,
+        "worst": 38.62328958351724
+      },
+      "rms_db_m20_to_m10": {
+        "median": 15.645172247771061,
+        "worst": 20.11607512428104
+      },
+      "rms_db_m40_to_m20": {
+        "median": 9.386748575503017,
+        "worst": 11.100161716141672
+      },
+      "rms_db_below_m40": {
+        "median": 5.914950564219277,
+        "worst": 6.745407526680565
+      },
+      "bias_db_within_m10": {
+        "median": -28.915588518396483,
+        "worst": -34.17988035235228
+      },
+      "max_abs_db_within_m10": {
+        "median": 40.383750000000006,
+        "worst": 47.7425
+      },
+      "peak_level_err_db": {
+        "median": -19.787499999999998,
+        "worst": -25.3325
+      },
+      "peak_dir_err_deg": {
+        "median": 12.52281171490517,
+        "worst": 25.458482467184755
+      },
+      "beam3db_solid_angle_ratio": {
+        "median": 0.0,
+        "worst": 0.0
+      },
+      "beam3db_iou": {
+        "median": 0.0,
+        "worst": 0.0
+      }
+    },
+    "linear_average_no_transport": {
+      "rms_db_hemisphere": {
+        "median": 8.32008487870994,
+        "worst": 10.537756260462272
+      },
+      "rms_db_within_m10": {
+        "median": 23.50536092546712,
+        "worst": 30.437761942802293
+      },
+      "rms_db_within_m3": {
+        "median": 26.816441185044937,
+        "worst": 35.20360568635235
+      },
+      "rms_db_m20_to_m10": {
+        "median": 10.71980362375631,
+        "worst": 16.14808325414592
+      },
+      "rms_db_m40_to_m20": {
+        "median": 8.631953417533303,
+        "worst": 10.835141395464843
+      },
+      "rms_db_below_m40": {
+        "median": 8.17805487804645,
+        "worst": 10.563480148956419
+      },
+      "bias_db_within_m10": {
+        "median": -22.94830962173847,
+        "worst": -29.86767815741394
+      },
+      "max_abs_db_within_m10": {
+        "median": 33.18860700024695,
+        "worst": 44.94623690957993
+      },
+      "peak_level_err_db": {
+        "median": -5.975997770872602,
+        "worst": -6.010588929559475
+      },
+      "peak_dir_err_deg": {
+        "median": 14.109861864031485,
+        "worst": 19.652591
