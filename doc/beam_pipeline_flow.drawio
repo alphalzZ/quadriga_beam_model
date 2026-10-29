@@ -1,0 +1,254 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="beam-pipeline" name="三步流程">
+    <mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="1700" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="&lt;b&gt;78 个实测方向图 → 502 阵子排布 → C1~C14 插值 → 留一检验&lt;/b&gt;" style="text;html=1;fontSize=20;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="1440" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lane1" value="" style="rounded=1;arcSize=2;fillColor=#eef4fb;strokeColor=#6c8ebf;strokeWidth=2;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="70" width="440" height="1370" as="geometry" />
+        </mxCell>
+        <mxCell id="head1" value="&lt;b&gt;一、阵列排布训练&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;baseline_fit/ · all_data_fit/&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#6c8ebf;fontColor=#ffffff;strokeColor=none;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="60" y="82" width="400" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="lane2" value="" style="rounded=1;arcSize=2;fillColor=#f0f7ee;strokeColor=#82b366;strokeWidth=2;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="540" y="70" width="440" height="1370" as="geometry" />
+        </mxCell>
+        <mxCell id="head2" value="&lt;b&gt;二、邻居插值得到 C1~C14&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;time_domain/make_allfit_link_arrays.m&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#82b366;fontColor=#ffffff;strokeColor=none;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="560" y="82" width="400" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="lane3" value="" style="rounded=1;arcSize=2;fillColor=#fff6eb;strokeColor=#d79b00;strokeWidth=2;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="70" width="440" height="1370" as="geometry" />
+        </mxCell>
+        <mxCell id="head3" value="&lt;b&gt;三、插值准确性检验（留一法）&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;interp_validation/&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d79b00;fontColor=#ffffff;strokeColor=none;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="1060" y="82" width="400" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="a1" value="&lt;b&gt;输入：78 个实验室扫描状态&lt;/b&gt;&lt;br&gt;Pitch 0~50°（6 个）× Azimuth 0~360°（13 个）&lt;br&gt;每个文件 91×360 归一化增益 dB（θ 0~90°，φ 0~359°）&lt;br&gt;只有功率：无相位、无绝对增益、无阵子位置" style="whiteSpace=wrap;html=1;fontSize=12;align=center;verticalAlign=middle;spacing=6;shape=parallelogram;perimeter=parallelogramPerimeter;size=0.06;fixedSize=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="70" y="172" width="380" height="102" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" value="&lt;b&gt;数据审计&lt;/b&gt;&lt;br&gt;Azimuth 360° 与 0° 逐格相同&lt;br&gt;Pitch 0° 各方位指向相同 → 取中值合并&lt;br&gt;固定坐标：阵面法线 +z" style="whiteSpace=wrap;html=1;fontSize=12;align=center;verticalAlign=middle;spacing=6;rounded=1;arcSize=8;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="70" y="308" width="380" height="86" as="geometry" />
+        </mxCell>
+        <mxCell id="a3" value="&lt;b&gt;物理模型假设（common/model.py）&lt;/b&gt;&lt;br&gt;三角栅格平面阵，5 个参数：&lt;br&gt;间距 d(λ)、旋转 ψ、行/列升余弦加权 a_r、a_c、阵元 cos^q θ&lt;br&gt;AF(u)=Σ w_n·exp(j2π/λ·p_n·(u−u0)) / Σ w_n&lt;br&gt;增益 = 20log|AF| + 10q·log(cosθ/cos pitch)，归一到 0 dB" style="whiteSpace=wrap;html=1;fontSize=12;align=center;verticalAlign=middle;spacing=6;rounded=1;arcSize=8;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="70" y="428" width="380" height="134" as="geometry" />
+        </mxCell>
+        <mxCell id="a4" value="&lt;b&gt;训练 / 留出划分（baseline_fit）&lt;/b&gt;&lt;br&gt;训练：19 个独立指向，≥ −15 dB 主瓣，共 2,610 点&lt;br&gt;留出：42 个文件（Pitch 20/40 的 24 个 + 方位留出 18 个）" style="whiteSpace=wrap;html=1;fontSize=12;align=center;verticalAlign=middle;spacing=6;rounded=1;arcSize=8;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="70" y="596" width="380" height="86" as="geometry" />
+        </mxCell>
+        <mxCell id="a5" value="&lt;b&gt;候选排布搜索（least_squares，dB 域）&lt;/b&gt;&lt;br&gt;阵子数先验 450~550&lt;br&gt;矩形外框 147 个 → 17×29=493，训练 0.78 dB&lt;br&gt;椭圆裁剪 151 个 → 41×17 椭圆 = 502 阵子，训练 0.098 dB ✔" style="whiteSpace=wrap;html=1;fontSize=12;align=center;verticalAlign=middle;spacing=6;rounded=1;arcSize=8;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="70" y="716" width="380" height="102" as="geometry" />
+        </mxCell>
+        <mxCell id="a6" value="&lt;b&gt;留出检验（椭圆 502 阵子）&lt;/b&gt;&lt;br&gt;主瓣 ≥ −10 dB：0.05 dB&lt;br&gt;≥ −20 dB：1.6 dB；全图（−65 dB 下限）：8 dB&lt;br&gt;→ 主瓣解释得好，旁瓣/零陷对不上" style="whiteSpace=wrap;html=1;fontSize=12;align=center;verticalAlign=middle;spacing=6;rounded=1;arcSize=8;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="70" y="852" width="380" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="a7" value="&lt;b&gt;全数据重估（all_data_fit）&lt;/b&gt;&lt;br&gt;78 个状态的 31,413 个高增益样本&lt;br&gt;d=0.545λ，ψ=−0.07°，a_r=0.011，a_c≈0，q=3.03" style="whiteSpace=wrap;html=1;fontSize=12;align=center;verticalAlign=middle;spacing=6;rounded=1;arcSize=8;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="70" y="976" width="380" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="a8" value="&lt;b&gt;逐点残差校准&lt;/b&gt;&lt;br&gt;residual[b,θ,φ] = 实测 − 物理基准&lt;br&gt;基准 + 残差 = 实测（误差 7×10⁻¹⁵ dB）&lt;br&gt;基准全图 RMSE ≈ 9.5 dB，残差最大 52.6 dB" style="whiteSpace=wrap;html=1;fontSize=12;align=center;verticalAlign=middle;spacing=6;rounded=1;arcSize=8;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="70" y="1090" width="380" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="a9" value="&lt;b&gt;注意&lt;/b&gt;&lt;br&gt;零误差来自逐点自由修正&lt;br&gt;不能证明真实阵子排布；节点上校准表 = 实测数据" style="whiteSpace=wrap;html=1;fontSize=12;align=center;verticalAlign=middle;spacing=6;rounded=1;arcSize=8;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="70" y="1214" width="380" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="a10" value="&lt;b&gt;physical_baseline.mat&lt;/b&gt;&lt;br&gt;502 阵子位置 p_n + 加权 w_n" style="whiteSpace=wrap;html=1;fontSize=12;align=center;verticalAlign=middle;spacing=6;shape=document;boundedLbl=1;size=0.18;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="70" y="1318" width="180" height="86" as="geometry" />
+        </mxCell>
+        <mxCell id="a11" value="&lt;b&gt;calibration_tables.mat&lt;/b&gt;&lt;br&gt;基准 dB + 残差 dB（= 实测）&lt;br&gt;+ 假设相位" style="whiteSpace=wrap;html=1;fontSize=12;align=center;verticalAlign=middle;spacing=6;shape=document;boundedLbl=1;size=0.18;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="270" y="1318" width="180" height="86" as="geometry" />
+        </mxCell>
+        <mxCell id="b1" value="&lt;b&gt;输入：sheet 的 14 个目标指向&lt;/b&gt;&lt;br&gt;θ = Pitch（离轴），φ = Azimuth&lt;br&gt;例：C1 = (45.43°, 188.62°)" style="whiteSpace=wrap;html=1;fontSize=12;align=center;verticalAlign=middle;spacing=6;shape=parallelogram;perimeter=parallelogramPerimeter;size=0.06;fixedSize=0;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="570" y="172" width="380" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="b2" value="&lt;b&gt;θ &amp;gt; 50°？&lt;/b&gt;" style="whiteSpace=wrap;html=1;fontSize=12;align=center;verticalAlign=middle;spacing=6;rhombus;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="570" y="286" width="380" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="b3" value="&lt;b&gt;否：取所在格子 4 个角点&lt;/b&gt;&lt;br&gt;10°×30° 扫描网格&lt;br&gt;C1：(40,180) (40,210) (50,180) (50,210)" style="whiteSpace=wrap;html=1;fontSize=12;align=center;verticalAlign=middle;spacing=6;rounded=1;arcSize=8;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="570" y="400" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="b4" value="&lt;b&gt;是：C9（50.37°）&lt;/b&gt;&lt;br&gt;用 50° 边界状态&lt;br&gt;旋转到 50.37°&lt;br&gt;外推 0.37°，不钳位" style="whiteSpace=wrap;html=1;fontSize=12;align=center;verticalAlign=middle;spacing=6;rounded=1;arcSize=8;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="770" y="400" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="b5" value="&lt;b&gt;双线性权重（俯仰 wp × 方位 wa）&lt;/b&gt;&lt;br&gt;wp=(45.43−40)/10=0.543，wa=(188.62−180)/30=0.287&lt;br&gt;C1 权重：0.326 / 0.131 / 0.387 / 0.156" style="whiteSpace=wrap;html=1;fontSize=12;align=center;verticalAlign=middle;spacing=6;rounded=1;arcSize=8;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="570" y="534" width="380" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="b6" value="&lt;b&gt;逐个邻居：整张功率图旋转到目标&lt;/b&gt;&lt;br&gt;Rodrigues 最小旋转 Q：邻居指向 → 目标指向&lt;br&gt;在邻居原图上查询 Q^T·u（主瓣随之对准）&lt;br&gt;10^(dB/10) 转线性功率，1° 网格双线性插值&lt;br&gt;落到邻居后半球（θ&amp;gt;90°）的点 = 0" style="whiteSpace=wrap;html=1;fontSize=12;align=center;verticalAlign=middle;spacing=6;rounded=1;arcSize=8;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="570" y="648" width="380" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="b7" value="&lt;b&gt;线性功率加权求和&lt;/b&gt;&lt;br&gt;P(u) = Σ w_k · P_k(Q_kᵀ u)&lt;br&gt;物理后半球 z&amp;lt;0 置 0" style="whiteSpace=wrap;html=1;fontSize=12;align=center;verticalAlign=middle;spacing=6;rounded=1;arcSize=8;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="570" y="802" width="380" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="b8" value="&lt;b&gt;相位（假设值）&lt;/b&gt;&lt;br&gt;502 阵子阵因子 AF(u) 指向目标的相角&lt;br&gt;实测没有相位" style="whiteSpace=wrap;html=1;fontSize=12;align=center;verticalAlign=middle;spacing=6;rounded=1;arcSize=8;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="570" y="906" width="380" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="b9" value="&lt;b&gt;合成电场与圆极化&lt;/b&gt;&lt;br&gt;field = √P · e^{j·相位}&lt;br&gt;Fa = field/√2，Fb = ∓j·Fa（RHCP 取 −，LHCP 取 +）&lt;br&gt;接收权重 Wq = taper·e^{j2π/λ·p·u}/‖taper‖" style="whiteSpace=wrap;html=1;fontSize=12;align=center;verticalAlign=middle;spacing=6;rounded=1;arcSize=8;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="570" y="1010" width="380" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="b10" value="&lt;b&gt;输出：C1~C14 等效波束&lt;/b&gt;&lt;br&gt;QuaDRiGa qd_arrayant（14 个端口）+ Wq&lt;br&gt;→ 频域 / 时域 OFDM 链路" style="whiteSpace=wrap;html=1;fontSize=12;align=center;verticalAlign=middle;spacing=6;shape=parallelogram;perimeter=parallelogramPerimeter;size=0.06;fixedSize=0;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="570" y="1134" width="380" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="b11" value="&lt;b&gt;注意&lt;/b&gt;&lt;br&gt;功率形状只取决于实测邻居&lt;br&gt;阵子排布只提供相位和阵子级权重" style="whiteSpace=wrap;html=1;fontSize=12;align=center;verticalAlign=middle;spacing=6;rounded=1;arcSize=8;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="570" y="1248" width="380" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="c1" value="&lt;b&gt;为什么要检验&lt;/b&gt;&lt;br&gt;C1~C14 没有实测真值&lt;br&gt;全数据校准的零误差只在测量节点上" style="whiteSpace=wrap;html=1;fontSize=12;align=center;verticalAlign=middle;spacing=6;rounded=1;arcSize=8;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="1070" y="172" width="380" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="c2" value="&lt;b&gt;选取留出的 beam_a（已测状态）&lt;/b&gt;&lt;br&gt;Pitch 10~40° × Azimuth 0~330°，共 48 个&lt;br&gt;排除 Pitch 0°/50° 的 26 个（一侧无邻居）&lt;br&gt;Azimuth 360° 按 0° 计" style="whiteSpace=wrap;html=1;fontSize=12;align=center;verticalAlign=middle;spacing=6;shape=parallelogram;perimeter=parallelogramPerimeter;size=0.06;fixedSize=0;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="1070" y="276" width="380" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="c3" value="&lt;b&gt;四个邻居 beam_w/x/y/z&lt;/b&gt;&lt;br&gt;(p±10°, a±30°)，权重各 0.25&lt;br&gt;beam_a 本身不参与插值&lt;br&gt;例：beam_a=(20,90) ← (10,60)(10,120)(30,60)(30,120)" style="whiteSpace=wrap;html=1;fontSize=12;align=center;verticalAlign=middle;spacing=6;rounded=1;arcSize=8;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="1070" y="400" width="380" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="c4" value="&lt;b&gt;同网格重建三种结果&lt;/b&gt;&lt;br&gt;① 旋转 + 线性功率（本方法）&lt;br&gt;② dB 直接平均（不旋转）&lt;br&gt;③ 线性功率平均（不旋转）" style="whiteSpace=wrap;html=1;fontSize=12;align=center;verticalAlign=middle;spacing=6;rounded=1;arcSize=8;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="1070" y="524" width="380" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="c5" value="&lt;b&gt;实现核对&lt;/b&gt;&lt;br&gt;Octave 8.4 + QuaDRiGa 运行原 MATLAB 函数（C1）&lt;br&gt;Python 移植 vs Octave：5×10⁻¹⁵&lt;br&gt;校准表 vs 78 个 txt：7×10⁻¹⁵ dB" style="whiteSpace=wrap;html=1;fontSize=12;align=center;verticalAlign=middle;spacing=6;rounded=1;arcSize=8;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="1070" y="648" width="380" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="c6" value="&lt;b&gt;与 beam_a 实测图逐点比较&lt;/b&gt;&lt;br&gt;按实测电平分区 RMS（−3/−10/−20/−40 dB）&lt;br&gt;峰值电平、峰值方向、−3 dB 区域立体角比与 IoU" style="whiteSpace=wrap;html=1;fontSize=12;align=center;verticalAlign=middle;spacing=6;rounded=1;arcSize=8;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="1070" y="772" width="380" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="c7" value="&lt;b&gt;结果（48 个状态，中位数 / 最差）&lt;/b&gt;&lt;br&gt;≥ −10 dB RMS：0.25 / 0.49 dB（不旋转：23~30 dB）&lt;br&gt;峰值方向误差：0° / 1°；−3 dB IoU 0.97&lt;br&gt;−20~−40 dB：4.6 dB；&amp;lt; −40 dB：6.6 dB" style="whiteSpace=wrap;html=1;fontSize=12;align=center;verticalAlign=middle;spacing=6;rounded=1;arcSize=8;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="1070" y="886" width="380" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="c8" value="&lt;b&gt;结论&lt;/b&gt;&lt;br&gt;主瓣、指向、−3 dB 波束宽度可信；旋转是关键&lt;br&gt;旁瓣/零陷有 4.5~9 dB 不确定性" style="whiteSpace=wrap;html=1;fontSize=12;align=center;verticalAlign=middle;spacing=6;rounded=1;arcSize=8;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="1070" y="1020" width="380" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="c9" value="&lt;b&gt;适用范围&lt;/b&gt;&lt;br&gt;只验证功率（相位为假设）&lt;br&gt;只验证 10°×30° 邻居间距；Pitch 0°/50° 未验证" style="whiteSpace=wrap;html=1;fontSize=12;align=center;verticalAlign=middle;spacing=6;rounded=1;arcSize=8;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="1070" y="1124" width="380" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="legend" value="&lt;b&gt;图例&lt;/b&gt;&lt;br&gt;实线箭头：阶段内流程　　紫色虚线：跨阶段数据流&lt;br&gt;蓝/绿/橙：各阶段步骤　　平行四边形：输入/输出　　波浪底框：结果文件&lt;br&gt;黄色菱形：判断　　红框：注意事项/局限　　浅绿框：检验结果" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12;align=left;spacing=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1460" width="1440" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="e0" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=12;fontStyle=1;" edge="1" parent="1" source="a1" target="a2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=12;fontStyle=1;" edge="1" parent="1" source="a2" target="a3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=12;fontStyle=1;" edge="1" parent="1" source="a3" target="a4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=12;fontStyle=1;" edge="1" parent="1" source="a4" target="a5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=12;fontStyle=1;" edge="1" parent="1" source="a5" target="a6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=12;fontStyle=1;" edge="1" parent="1" source="a6" target="a7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=12;fontStyle=1;" edge="1" parent="1" source="a7" target="a8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=12;fontStyle=1;" edge="1" parent="1" source="a8" target="a9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=12;fontStyle=1;" edge="1" parent="1" source="a9" target="a10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=12;fontStyle=1;" edge="1" parent="1" source="a9" target="a11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=12;fontStyle=1;" edge="1" parent="1" source="b1" target="b2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" value="否" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=12;fontStyle=1;" edge="1" parent="1" source="b2" target="b3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" value="是" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=12;fontStyle=1;" edge="1" parent="1" source="b2" target="b4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=12;fontStyle=1;" edge="1" parent="1" source="b3" target="b5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=12;fontStyle=1;" edge="1" parent="1" source="b5" target="b6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=12;fontStyle=1;" edge="1" parent="1" source="b6" target="b7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=12;fontStyle=1;" edge="1" parent="1" source="b7" target="b8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e17" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=12;fontStyle=1;" edge="1" parent="1" source="b8" target="b9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e18" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=12;fontStyle=1;" edge="1" parent="1" source="b9" target="b10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e19" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=12;fontStyle=1;" edge="1" parent="1" source="b10" target="b11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e20" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=12;fontStyle=1;" edge="1" parent="1" source="c1" target="c2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e21" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=12;fontStyle=1;" edge="1" parent="1" source="c2" target="c3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e22" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=12;fontStyle=1;" edge="1" parent="1" source="c3" target="c4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e23" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=12;fontStyle=1;" edge="1" parent="1" source="c4" target="c5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e24" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=12;fontStyle=1;" edge="1" parent="1" source="c5" target="c6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e25" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=12;fontStyle=1;" edge="1" parent="1" source="c6" target="c7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e26" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=12;fontStyle=1;" edge="1" parent="1" source="c7" target="c8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e27" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=12;fontStyle=1;" edge="1" parent="1" source="c8" target="c9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e28" value="" style="html=1;endArrow=block;endFill=1;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;exitX=1;exitY=0.5;entryX=1;entryY=0.25;" edge="1" parent="1" source="b4" target="b6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="968" y="450" />
+              <mxPoint x="968" y="678" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e29" value="邻居实测功率图" style="html=1;endArrow=block;endFill=1;edgeStyle=orthogonalEdgeStyle;rounded=1;dashed=1;strokeWidth=2;strokeColor=#9673a6;fontColor=#9673a6;fontSize=11;fontStyle=1;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="a11" target="b6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="510" y="1361" />
+              <mxPoint x="510" y="708" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e30" value="阵子位置 / 加权" style="html=1;endArrow=block;endFill=1;edgeStyle=orthogonalEdgeStyle;rounded=1;dashed=1;strokeWidth=2;strokeColor=#9673a6;fontColor=#9673a6;fontSize=11;fontStyle=1;labelBackgroundColor=#ffffff;exitX=0.5;exitY=1;entryX=0;entryY=0.5;" edge="1" parent="1" source="a10" target="b8">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="160" y="1418" />
+              <mxPoint x="498" y="1418" />
+              <mxPoint x="498" y="941" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e31" value="被检验的插值算法" style="html=1;endArrow=block;endFill=1;edgeStyle=orthogonalEdgeStyle;rounded=1;dashed=1;strokeWidth=2;strokeColor=#9673a6;fontColor=#9673a6;fontSize=11;fontStyle=1;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="b7" target="c4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1010" y="837" />
+              <mxPoint x="1010" y="569" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e32" value="78 个实测文件：beam_a 真值 + 四个邻居" style="html=1;endArrow=block;endFill=1;edgeStyle=orthogonalEdgeStyle;rounded=1;dashed=1;strokeWidth=2;strokeColor=#9673a6;fontColor=#9673a6;fontSize=11;fontStyle=1;labelBackgroundColor=#ffffff;exitX=1;exitY=0.2;entryX=0;entryY=0.5;" edge="1" parent="1" source="a1" target="c2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="520" y="192" />
+              <mxPoint x="520" y="152" />
+              <mxPoint x="1020" y="152" />
+              <mxPoint x="1020" y="321" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
